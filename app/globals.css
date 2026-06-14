@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ist-bg:       #F2F3F5;
+  --ist-surface:  #FFFFFF;
+  --ist-border:   #E5E7EB;
+  --ist-text:     #323B4B;
+  --ist-subtext:  #8A94A6;
+  --ist-muted:    #B0B7C3;
+  --ist-card:     #F8F9FA;
+}
+
+.dark {
+  --ist-bg:       #1C1E26;
+  --ist-surface:  #242731;
+  --ist-border:   #2E3140;
+  --ist-text:     #F2F3F5;
+  --ist-subtext:  #8A94A6;
+  --ist-muted:    #4A5168;
+  --ist-card:     #2A2D3A;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: var(--ist-bg);
+  color: var(--ist-text);
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Clash Display', 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.custom-scrollbar::-webkit-scrollbar { width: 3px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: var(--ist-surface); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: var(--ist-border); border-radius: 50px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #377DFF; }
+
+@layer utilities {
+  .text-10 { @apply text-[10px] leading-[14px]; }
+  .text-12 { @apply text-[12px] leading-[16px]; }
+  .text-14 { @apply text-[14px] leading-[20px]; }
+  .text-16 { @apply text-[16px] leading-[24px]; }
+  .text-18 { @apply text-[18px] leading-[22px]; }
+  .text-20 { @apply text-[20px] leading-[24px]; }
+  .text-24 { @apply text-[24px] leading-[30px]; }
+  .text-26 { @apply text-[26px] leading-[32px]; }
+  .text-30 { @apply text-[30px] leading-[38px]; }
+  .text-36 { @apply text-[36px] leading-[44px]; }
+
+  .flex-center { @apply flex items-center justify-center; }
+  .header-2 { @apply text-18 font-semibold text-ist-text; }
+
+  .input-class {
+    @apply text-16 placeholder:text-16 rounded-xl border border-ist-border
+           bg-ist-surface text-ist-text placeholder:text-ist-muted
+           focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-all;
+  }
+
+  /* ── Root App Layout ───────────────────────────────────── */
+  .home {
+    @apply no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll;
+    background-color: var(--ist-bg);
+  }
+
+  .home-content {
+    @apply no-scrollbar flex w-full flex-1 flex-col gap-6 px-6 py-6 xl:max-h-screen xl:overflow-y-scroll;
+    background-color: var(--ist-bg);
+  }
+
+  .home-header { @apply flex flex-col gap-4; }
+
+  /* ── Card List Section ─────────────────────────────────── */
+  .card-list-section {
+    @apply rounded-2xl border border-ist-border p-5;
+    background-color: var(--ist-surface);
+  }
+
+  .card-list-header {
+    @apply flex items-center justify-between mb-4;
+  }
+
+  .card-list-title {
+    @apply text-18 font-semibold text-ist-text flex items-center gap-2;
+  }
+
+  .card-count-badge {
+    @apply text-14 font-medium text-ist-subtext;
+  }
+
+  .add-card-btn {
+    @apply flex items-center gap-1.5 rounded-xl px-4 py-2 text-14 font-semibold text-white transition-all hover:opacity-90;
+    background-color: #377DFF;
+  }
+
+  /* ── Bank Card ─────────────────────────────────────────── */
+  .bank-card {
+    @apply relative flex h-[180px] w-full max-w-[280px] flex-col justify-between rounded-2xl p-5 overflow-hidden cursor-pointer transition-transform hover:scale-[1.02];
+    background: linear-gradient(135deg, #377DFF 0%, #2058D4 100%);
+  }
+
+  .bank-card-dark {
+    background: linear-gradient(135deg, #2A2D3A 0%, #1C1E26 100%) !important;
+    border: 1px solid #2E3140;
+  }
+
+  .bank-card_content { @apply relative z-10 flex size-full flex-col justify-between; }
+  .bank-card_icon    { @apply flex size-full flex-1 flex-col items-end justify-between; }
+
+  /* ── Stat Cards ────────────────────────────────────────── */
+  .stat-card {
+    @apply flex flex-col items-center justify-center gap-3 rounded-2xl border border-ist-border p-5;
+    background-color: var(--ist-surface);
+  }
+  .stat-card-icon  { @apply flex-center size-14 rounded-full; }
+  .stat-card-label { @apply text-12 font-medium text-ist-subtext text-center mt-1; }
+  .stat-card-value { @apply text-20 font-bold text-ist-text; }
+
+  /* ── Money Flow Chart Section ──────────────────────────── */
+  .money-flow-section {
+    @apply rounded-2xl border border-ist-border p-5;
+    background-color: var(--ist-surface);
+  }
+
+  /* ── Activity Section ──────────────────────────────────── */
+  .activity-section {
+    @apply rounded-2xl border border-ist-border p-5;
+    background-color: var(--ist-surface);
+  }
+
+  /* ── Total Balance Box ─────────────────────────────────── */
+  .total-balance {
+    @apply flex w-full items-center gap-4 rounded-2xl border border-ist-border p-5;
+    background-color: var(--ist-surface);
+  }
+  .total-balance-chart  { @apply flex size-full max-w-[80px] items-center; }
+  .total-balance-label  { @apply text-12 font-medium text-ist-subtext; }
+  .total-balance-amount { @apply text-20 lg:text-24 font-bold text-ist-text; }
+
+  /* ── Recent Transactions ───────────────────────────────── */
+  .recent-transactions         { @apply flex w-full flex-col gap-4; }
+  .view-all-btn                { @apply text-14 rounded-xl border border-ist-border px-4 py-2 font-semibold text-ist-subtext hover:border-brand-blue hover:text-brand-blue transition-all; }
+  .recent-transactions-label   { @apply text-18 font-semibold text-ist-text; }
+  .recent-transactions-tablist { @apply custom-scrollbar mb-4 flex w-full flex-nowrap gap-1; }
+
+  /* ── Right Sidebar ─────────────────────────────────────── */
+  .right-sidebar {
+    @apply no-scrollbar hidden h-screen max-h-screen flex-col border-l border-ist-border xl:flex w-[300px] xl:overflow-y-scroll !important;
+    background-color: var(--ist-surface);
+  }
+
+  .profile-banner {
+    @apply h-0 w-full;
+  }
+
+  .profile                { @apply relative flex px-5 max-xl:justify-center; }
+  .profile-img            { @apply flex-center size-14 rounded-full bg-brand-blue text-white text-18 font-bold; }
+  .profile-details        { @apply flex flex-col pt-3; }
+  .profile-name           { @apply text-16 font-bold text-ist-text; }
+  .profile-email          { @apply text-12 font-normal text-ist-subtext; }
+  .banks                  { @apply flex flex-col gap-4 px-5 py-4; }
+
+  /* ── Wallet panel ──────────────────────────────────────── */
+  .wallet-panel           { @apply flex flex-col gap-3 px-5 py-5 border-b border-ist-border; }
+  .wallet-balance         { @apply text-28 font-bold text-ist-text leading-tight; }
+
+  .wallet-action-btn {
+    @apply flex-center flex-col gap-1.5 rounded-xl p-3 border border-ist-border cursor-pointer transition-all hover:border-brand-blue;
+    background-color: var(--ist-bg);
+  }
+  .wallet-action-icon     { @apply flex-center size-9 rounded-full bg-brand-blue/10 text-brand-blue text-16 font-bold; }
+
+  /* ── Daily limit bar ───────────────────────────────────── */
+  .limit-bar-track {
+    @apply w-full h-2 rounded-full;
+    background-color: var(--ist-border);
+  }
+  .limit-bar-fill {
+    @apply h-2 rounded-full;
+    background-color: #FFCC00;
+  }
+
+  /* ── My Banks ──────────────────────────────────────────── */
+  .my-banks     { @apply flex h-screen max-h-screen w-full flex-col gap-8 p-8 xl:py-12; background-color: var(--ist-bg); }
+  .transactions { @apply flex max-h-screen w-full flex-col gap-8 overflow-y-scroll p-8 xl:py-12; background-color: var(--ist-bg); }
+  .transactions-header  { @apply flex w-full flex-col items-start justify-between gap-8 md:flex-row; }
+  .transactions-account {
+    @apply flex flex-col justify-between gap-4 rounded-2xl border border-ist-border px-6 py-5 md:flex-row;
+    background-color: var(--ist-surface);
+  }
+  .transactions-account-balance {
+    @apply flex-center flex-col gap-2 rounded-xl px-4 py-2 border border-ist-border;
+    background-color: var(--ist-bg);
+  }
+
+  /* ── Header Box ────────────────────────────────────────── */
+  .header-box         { @apply flex flex-col gap-1; }
+  .header-box-title   { @apply text-22 lg:text-26 font-bold text-ist-text; }
+  .header-box-subtext { @apply text-14 font-normal text-ist-subtext; }
+
+  /* ── Bank Info ─────────────────────────────────────────── */
+  .bank-info {
+    @apply gap-3 flex p-4 transition-all border border-ist-border hover:border-brand-blue rounded-xl cursor-pointer;
+    background-color: var(--ist-surface);
+  }
+  .bank-info_content { @apply flex flex-1 items-center justify-between gap-2 overflow-hidden; }
+
+  /* ── Category Badge ────────────────────────────────────── */
+  .category-badge {
+    @apply flex-center truncate w-fit gap-1 rounded-full border py-[2px] pl-1.5 pr-2 border-ist-border;
+    background-color: var(--ist-card);
+  }
+
+  .banktab-item {
+    @apply border-b-2 border-transparent flex px-3 py-2 transition-all hover:border-brand-blue cursor-pointer;
+  }
+
+  /* ── Mobile Nav ────────────────────────────────────────── */
+  .mobilenav-sheet { @apply flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto; background-color: var(--ist-bg); }
+  .mobilenav-sheet_close { @apply flex gap-3 items-center p-4 rounded-xl w-full max-w-60 text-ist-text hover:bg-ist-card transition-all; }
+
+  /* ── Auth ──────────────────────────────────────────────── */
+  .auth-asset {
+    @apply flex h-screen w-full sticky top-0 items-center justify-end max-lg:hidden;
+    background: linear-gradient(135deg, #377DFF 0%, #2058D4 60%, #71D163 100%);
+  }
+  .auth-form  { @apply flex min-h-screen w-full max-w-[420px] flex-col justify-center gap-5 py-10 md:gap-6; }
+  .form-item  { @apply flex flex-col gap-1.5; }
+  .form-label { @apply text-14 font-medium text-ist-subtext; }
+  .form-message { @apply text-12 text-red-500; }
+  .form-btn {
+    @apply text-16 rounded-xl font-semibold text-white transition-all hover:opacity-90;
+    background: #377DFF;
+  }
+  .form-link  { @apply text-14 cursor-pointer font-semibold text-brand-blue hover:opacity-80 transition-all; }
+
+  /* ── Payment Transfer ──────────────────────────────────── */
+  .payment-transfer { @apply no-scrollbar flex flex-col overflow-y-scroll p-8 md:max-h-screen xl:py-12; background-color: var(--ist-bg); }
+  .payment-transfer_form-item    { @apply flex w-full max-w-[850px] flex-col gap-3 md:flex-row lg:gap-8; }
+  .payment-transfer_form-content { @apply flex w-full max-w-[280px] flex-col gap-2; }
+  .payment-transfer_form-details { @apply flex flex-col gap-1 border-t border-ist-border pb-5 pt-6; }
+  .payment-transfer_btn-box      { @apply mt-5 flex w-full max-w-[850px] gap-3 py-5; }
+  .payment-transfer_btn {
+    @apply text-14 w-full rounded-xl font-semibold text-white !important;
+    background: #377DFF !important;
+  }
+
+  /* ── Root layout top bar ───────────────────────────────── */
+  .root-layout {
+    @apply flex h-16 items-center justify-between p-5 sm:p-8 md:hidden border-b border-ist-border;
+    background-color: var(--ist-surface);
+  }
+
+  /* ── Footer / Sidebar bottom ───────────────────────────── */
+  .footer { @apply flex cursor-pointer items-center justify-between gap-2 py-3 px-2 rounded-xl hover:bg-ist-card transition-all; }
+  .footer_name         { @apply flex size-9 items-center justify-center rounded-full bg-brand-blue text-white font-bold text-14 max-xl:hidden; }
+  .footer_email        { @apply flex flex-1 flex-col justify-center max-xl:hidden; }
+  .footer_name-mobile  { @apply flex size-9 items-center justify-center rounded-full bg-brand-blue text-white font-bold text-14; }
+  .footer_email-mobile { @apply flex flex-1 flex-col justify-center; }
+  .footer_image        { @apply relative size-5 max-xl:w-full max-xl:flex max-xl:justify-center max-xl:items-center; }
+
+  /* ── Sidebar ───────────────────────────────────────────── */
+  .sidebar {
+    @apply sticky left-0 top-0 flex h-screen w-fit flex-col justify-between border-r border-ist-border pt-6 max-md:hidden sm:p-4 xl:p-5 2xl:w-[240px];
+    background-color: var(--ist-surface);
+  }
+  .sidebar-logo  { @apply 2xl:text-20 text-[18px] font-bold text-ist-text max-xl:hidden; }
+  .sidebar-link  { @apply flex gap-3 items-center py-1 md:p-3 2xl:p-3 rounded-xl justify-center xl:justify-start transition-all hover:bg-ist-card; }
+  .sidebar-label { @apply text-14 font-medium text-ist-subtext max-xl:hidden; }
+
+  .bg-bank-gradient {
+    background-color: rgba(55, 125, 255, 0.1) !important;
+    border: 1px solid rgba(55, 125, 255, 0.25) !important;
+  }
+  .bg-bank-gradient .sidebar-label { color: #377DFF !important; font-weight: 600 !important; }
+}
